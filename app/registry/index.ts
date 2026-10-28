@@ -43,6 +43,24 @@ import terminalBlockSource from '~/components/ui/UTerminalBlock.vue?raw'
 import terminalBlockUsage from '~/components/demo/DemoTerminalBlock.vue?raw'
 import browserStepSource from '~/components/ui/UBrowserStep.vue?raw'
 import browserStepUsage from '~/components/demo/DemoBrowserStep.vue?raw'
+import attachmentsSource from '~/components/ui/UAttachments.vue?raw'
+import attachmentsUsage from '~/components/demo/DemoAttachments.vue?raw'
+import modelPickerSource from '~/components/ui/UModelPicker.vue?raw'
+import modelPickerUsage from '~/components/demo/DemoModelPicker.vue?raw'
+import sourcesSource from '~/components/ui/USources.vue?raw'
+import sourcesUsage from '~/components/demo/DemoSources.vue?raw'
+import toastSource from '~/components/ui/UToast.vue?raw'
+import toastUsage from '~/components/demo/DemoToast.vue?raw'
+import skeletonSource from '~/components/ui/USkeleton.vue?raw'
+import skeletonUsage from '~/components/demo/DemoSkeleton.vue?raw'
+import selectSource from '~/components/ui/USelect.vue?raw'
+import selectUsage from '~/components/demo/DemoSelect.vue?raw'
+import checkboxSource from '~/components/ui/UCheckbox.vue?raw'
+import checkboxUsage from '~/components/demo/DemoCheckbox.vue?raw'
+import paginationSource from '~/components/ui/UPagination.vue?raw'
+import paginationUsage from '~/components/demo/DemoPagination.vue?raw'
+import agentWorkspaceSource from '~/components/patterns/PatternAgentWorkspace.vue?raw'
+import landingSource from '~/components/patterns/PatternLanding.vue?raw'
 import loginSource from '~/components/patterns/PatternLogin.vue?raw'
 import dashboardSource from '~/components/patterns/PatternDashboard.vue?raw'
 
@@ -81,11 +99,21 @@ const sourceMap: Record<string, { source: string; usage: string }> = {
   'code-diff': { source: codeDiffSource, usage: codeDiffUsage },
   'terminal-block': { source: terminalBlockSource, usage: terminalBlockUsage },
   'browser-step': { source: browserStepSource, usage: browserStepUsage },
+  attachments: { source: attachmentsSource, usage: attachmentsUsage },
+  'model-picker': { source: modelPickerSource, usage: modelPickerUsage },
+  sources: { source: sourcesSource, usage: sourcesUsage },
+  toast: { source: toastSource, usage: toastUsage },
+  skeleton: { source: skeletonSource, usage: skeletonUsage },
+  select: { source: selectSource, usage: selectUsage },
+  checkbox: { source: checkboxSource, usage: checkboxUsage },
+  pagination: { source: paginationSource, usage: paginationUsage },
 }
 
 const patternSourceMap: Record<string, string> = {
   login: loginSource,
   dashboard: dashboardSource,
+  'agent-workspace': agentWorkspaceSource,
+  landing: landingSource,
 }
 
 export const componentEntries: RegistryEntry[] = components.map((c) => ({

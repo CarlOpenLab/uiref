@@ -31,6 +31,9 @@
 - /components/tool-call — 工具调用：工具名 + 运行/成功/失败状态，可展开参数与结果（Function Calling / MCP）
 - /components/quick-replies — 建议追问：对话末尾快捷指令 chips
 - /components/permission — 权限审批：敏感操作确认卡，允许一次 / 总是允许 / 拒绝
+- /components/attachments — 附件：文件上传 pill（类型图标 / 进度 / 失败 / 移除）
+- /components/model-picker — 模型选择器：分组下拉 + 描述 + 选中态
+- /components/sources — 来源引用：检索来源编号 chips + 可展开列表
 
 ## Agent 执行
 
@@ -39,10 +42,20 @@
 - /components/terminal-block — 终端执行：命令 + 输出流 + 状态，运行中可停止
 - /components/browser-step — 浏览器操作：computer-use 步骤卡，动作 + 网址 + 截图高亮区域
 
+## 通用组件
+
+- /components/toast — 轻提示：success / error / info，自动消失
+- /components/skeleton — 骨架屏：shimmer 加载占位（Agent 回复 / 卡片预设）
+- /components/select — 下拉选择：v-model、占位、禁用
+- /components/checkbox — 复选框：v-model、插槽 label
+- /components/pagination — 分页：省略号折叠、当前页高亮
+
 ## 页面模板
 
 - /patterns/login — 居中卡片式登录页：表单 + 第三方登录 + 辅助链接
 - /patterns/dashboard — 后台仪表盘：侧边栏 + 顶栏搜索 + 统计卡片 + 数据表格
+- /patterns/agent-workspace — Agent 工作台：会话侧边栏 + 模型选择 + 思考/任务/工具调用线程 + 发送器（全库 Agent 组件的组合示范）
+- /patterns/landing — SaaS 落地页：导航 + Hero + Logo 墙 + 特性卡片 + CTA + 页脚
 
 ## 仓库源码约定
 

@@ -23,6 +23,16 @@ import DemoTaskList from '~/components/demo/DemoTaskList.vue'
 import DemoCodeDiff from '~/components/demo/DemoCodeDiff.vue'
 import DemoTerminalBlock from '~/components/demo/DemoTerminalBlock.vue'
 import DemoBrowserStep from '~/components/demo/DemoBrowserStep.vue'
+import DemoAttachments from '~/components/demo/DemoAttachments.vue'
+import DemoModelPicker from '~/components/demo/DemoModelPicker.vue'
+import DemoSources from '~/components/demo/DemoSources.vue'
+import DemoToast from '~/components/demo/DemoToast.vue'
+import DemoSkeleton from '~/components/demo/DemoSkeleton.vue'
+import DemoSelect from '~/components/demo/DemoSelect.vue'
+import DemoCheckbox from '~/components/demo/DemoCheckbox.vue'
+import DemoPagination from '~/components/demo/DemoPagination.vue'
+import PatternAgentWorkspace from '~/components/patterns/PatternAgentWorkspace.vue'
+import PatternLanding from '~/components/patterns/PatternLanding.vue'
 import PatternLogin from '~/components/patterns/PatternLogin.vue'
 import PatternDashboard from '~/components/patterns/PatternDashboard.vue'
 
@@ -46,9 +56,19 @@ export const demoMap: Record<string, Component> = {
   'code-diff': DemoCodeDiff,
   'terminal-block': DemoTerminalBlock,
   'browser-step': DemoBrowserStep,
+  attachments: DemoAttachments,
+  'model-picker': DemoModelPicker,
+  sources: DemoSources,
+  toast: DemoToast,
+  skeleton: DemoSkeleton,
+  select: DemoSelect,
+  checkbox: DemoCheckbox,
+  pagination: DemoPagination,
 }
 
 export const patternDemoMap: Record<string, Component> = {
   login: PatternLogin,
   dashboard: PatternDashboard,
+  'agent-workspace': PatternAgentWorkspace,
+  landing: PatternLanding,
 }

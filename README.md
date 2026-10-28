@@ -61,9 +61,12 @@ npm run generate   # 纯静态生成（SSG）
 
 ## Roadmap
 
-- [x] Agent 组件系列（对话：sender / message / thinking / stream / tool-call / quick-replies / permission；执行：task-list / code-diff / terminal / browser-step）
+- [x] Agent 组件批次 1（对话：sender / message / thinking / stream / tool-call / quick-replies / permission；执行：task-list / code-diff / terminal / browser-step）
+- [x] Agent 组件批次 2（attachments / sources / model-picker）
+- [x] 通用组件（toast / skeleton / select / checkbox / pagination；dropdown 由 model-picker 与 select 覆盖，radio 场景并入 checkbox）
+- [x] 页面模板：登录页 / 后台仪表盘 / Agent 工作台 / 落地页
 - [ ] 暗色模式
 - [ ] 构建期把源码注入 `/api/registry`（一次 GET 拿全部代码）
 - [ ] 代码块语法高亮（shiki）
-- [ ] 更多组件：select / checkbox / radio / dropdown / toast / pagination / skeleton / attachments / sources
-- [ ] 更多模板：Agent 工作台、设置页、列表页、文章页、落地页
+- [ ] 更多模板：设置页、列表页、文章页
+- [ ] 持续 loop：按网站逐个扒范式入库（每批 = 检索 → 实现 → 注册 → 验证 → 推送）

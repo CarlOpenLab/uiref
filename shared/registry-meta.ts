@@ -172,6 +172,61 @@ export const components: MetaEntry[] = [
     description:
       'computer-use 步骤卡。步骤序号 + 动作描述 + 目标网址 + 截图区域，展示 Agent 操控浏览器的过程。',
   },
+  {
+    name: 'attachments',
+    title: '附件',
+    category: 'agent',
+    description:
+      '文件上传列表。按类型着色的图标（图片 / PDF / 代码 / 文件）、上传进度条、失败态与移除操作。',
+  },
+  {
+    name: 'model-picker',
+    title: '模型选择器',
+    category: 'agent',
+    description:
+      '分组下拉选择模型。选项带描述与 New/Beta 标签、选中打勾，点击外部自动收起。',
+  },
+  {
+    name: 'sources',
+    title: '来源引用',
+    category: 'agent',
+    description:
+      '检索类回答的来源块。编号角标行 + 可展开来源列表（标题 + 站点），点击 emit select。',
+  },
+  {
+    name: 'toast',
+    title: '轻提示',
+    category: 'feedback',
+    description:
+      '全局轻提示。success / error / info 三态，支持自动消失时长与手动关闭，Teleport 渲染在底部居中。',
+  },
+  {
+    name: 'skeleton',
+    title: '骨架屏',
+    category: 'feedback',
+    description:
+      'shimmer 加载占位块。尺寸圆角由类名控制，demo 提供 Agent 回复与卡片两种常见预设。',
+  },
+  {
+    name: 'select',
+    title: '下拉选择',
+    category: 'form',
+    description:
+      '表单级下拉选择。与输入框同宽同高，v-model 绑定，支持占位与禁用态。',
+  },
+  {
+    name: 'checkbox',
+    title: '复选框',
+    category: 'form',
+    description: '自定义复选框。v-model 绑定，label 可用插槽替换，带禁用态。',
+  },
+  {
+    name: 'pagination',
+    title: '分页',
+    category: 'data',
+    description:
+      '页码分页。总页数超 7 页时自动省略号折叠，当前页实心高亮，首末页禁用翻页。',
+  },
 ]
 
 export const patterns: MetaEntry[] = [
@@ -186,5 +241,18 @@ export const patterns: MetaEntry[] = [
     title: '后台仪表盘',
     category: 'pattern',
     description: '后台首页布局：侧边栏导航 + 顶栏搜索 + 统计卡片 + 数据表格。',
+  },
+  {
+    name: 'agent-workspace',
+    title: 'Agent 工作台',
+    category: 'pattern',
+    description:
+      '完整的 Agent 对话工作台：会话侧边栏 + 模型选择 + 思考/任务/工具调用线程 + 发送器，全库 Agent 组件的组合示范。',
+  },
+  {
+    name: 'landing',
+    title: '落地页',
+    category: 'pattern',
+    description: 'SaaS 营销落地页：导航 + Hero + 客户 Logo + 特性卡片 + CTA 区 + 页脚。',
   },
 ]
