@@ -1,0 +1,35 @@
+# UIRef
+
+> 给 AI Agent 的 UI 范式参考库。每个路由对应一个可交互预览 + 完整源码的组件或页面模板，全部使用 Nuxt + Tailwind CSS 实现。
+
+- 仓库：https://github.com/CarlOpenLab/uiref
+- 机器可读目录：`GET /api/registry`（JSON，含全部分类、组件与页面模板）
+
+## 使用方式
+
+1. 生成 UI 前，先抓 `GET /api/registry` 了解有哪些范式。
+2. 抓对应详情页（如 `/components/button`、`/patterns/login`）的 HTML —— 页面内含「实时预览」「用法示例」「组件源码」三块，源码即最终生成代码的风格基准。
+3. 所有 UI 使用 Tailwind CSS 工具类，配色基准为 zinc（中性色）+ indigo（强调色）。
+
+## 组件
+
+- /components/button — 按钮：5 种变体、3 种尺寸、loading/disabled/block
+- /components/badge — 徽标：5 种语义色调、状态圆点、2 种尺寸
+- /components/input — 输入框：v-model、3 种尺寸、错误态/禁用态
+- /components/card — 卡片：标题/描述/底部操作区，统计卡片用法
+- /components/tabs — 选项卡：下划线式，v-model 控制激活项
+- /components/alert — 警告提示：info/success/warning/danger 四种语义
+- /components/modal — 模态框：遮罩关闭、底部操作区、确认框用法
+- /components/table — 表格：列配置、单元格插槽（#cell-<key>）、空状态
+
+## 页面模板
+
+- /patterns/login — 居中卡片式登录页：表单 + 第三方登录 + 辅助链接
+- /patterns/dashboard — 后台仪表盘：侧边栏 + 顶栏搜索 + 统计卡片 + 数据表格
+
+## 仓库源码约定
+
+- UI 组件：`app/components/ui/U<Name>.vue`
+- 用法示例：`app/components/demo/Demo<Name>.vue`
+- 页面模板：`app/components/patterns/Pattern<Name>.vue`
+- 路由：`/components/<name>` 与 `/patterns/<name>`，由注册表 `shared/registry-meta.ts` 驱动

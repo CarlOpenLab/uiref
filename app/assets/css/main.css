@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Consolas,
+    "Liberation Mono", Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* UModal 进出场 */
+.u-modal-enter-active,
+.u-modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+.u-modal-enter-from,
+.u-modal-leave-to {
+  opacity: 0;
+}
