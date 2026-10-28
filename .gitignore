@@ -4,6 +4,9 @@ node_modules
 dist
 .data
 
+# registry-code 模块构建期生成
+server/generated
+
 .env
 .env.*
 !.env.example

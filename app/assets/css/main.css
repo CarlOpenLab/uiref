@@ -11,12 +11,22 @@ html {
   scroll-behavior: smooth;
 }
 
-/* UModal 进出场 */
+/* UModal / UToast 进出场 */
 .u-modal-enter-active,
 .u-modal-leave-active {
   transition: opacity 0.2s ease;
 }
 .u-modal-enter-from,
 .u-modal-leave-to {
+  opacity: 0;
+}
+
+/* 路由切换淡入淡出 */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.15s ease;
+}
+.page-enter-from,
+.page-leave-to {
   opacity: 0;
 }

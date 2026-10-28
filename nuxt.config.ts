@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
 
+  modules: ['./modules/registry-code'],
+
   css: ['~/assets/css/main.css'],
 
   // 组件按文件名注册（不带目录前缀），路由页与 demo 都按名字直接引用

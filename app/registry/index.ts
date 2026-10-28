@@ -134,6 +134,16 @@ export function getPattern(name: string): PatternEntry | undefined {
   return patternEntries.find((p) => p.name === name)
 }
 
+/** 列表中某条目的上/下邻居，用于详情页底部导航 */
+export function neighbors<T extends { name: string }>(
+  list: T[],
+  name: string,
+): { prev?: T; next?: T } {
+  const index = list.findIndex((item) => item.name === name)
+  if (index === -1) return {}
+  return { prev: list[index - 1], next: list[index + 1] }
+}
+
 /** 按分类分组，供目录页渲染 */
 export function groupByCategory(): Array<CategoryMeta & { items: RegistryEntry[] }> {
   return categories.map((cat) => ({

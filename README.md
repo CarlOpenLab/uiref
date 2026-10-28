@@ -46,8 +46,10 @@ server/api/registry.get.ts           ← /api/registry
 
 ## Agent 接入
 
-- `GET /api/registry` — 发现全部条目（含分类、路由、仓库内源码路径）。
-- 抓详情页 HTML（SSR）即可获得完整源码；或直接读仓库 `app/components/` 下的文件。
+- `GET /api/registry` — 一次 GET 拿到全部条目的元数据**与完整源码**（构建期由 `modules/registry-code.ts` 扫描注入，dev 下组件文件变更自动重写 `server/generated/registry-code.json`，该目录已 gitignore）。
+- 抓详情页 HTML（SSR）可获得语法高亮的完整源码；或直接读仓库 `app/components/` 下的文件。
+- 每个详情页底部有「给 Agent 的使用提示」—— 可直接复制的提示词（含源码路径与样式基准）。
+- `POST /api/highlight` — 批量代码高亮服务（shiki, github-dark 主题）。
 - `public/llms.txt` 是给爬虫/agent 的入口说明。
 
 ## 本地开发
@@ -66,7 +68,7 @@ npm run generate   # 纯静态生成（SSG）
 - [x] 通用组件（toast / skeleton / select / checkbox / pagination；dropdown 由 model-picker 与 select 覆盖，radio 场景并入 checkbox）
 - [x] 页面模板：登录页 / 后台仪表盘 / Agent 工作台 / 落地页
 - [ ] 暗色模式
-- [ ] 构建期把源码注入 `/api/registry`（一次 GET 拿全部代码）
-- [ ] 代码块语法高亮（shiki）
+- [x] 构建期把源码注入 `/api/registry`（一次 GET 拿全部代码）
+- [x] 代码块语法高亮（shiki · github-dark，SSR 直出）
 - [ ] 更多模板：设置页、列表页、文章页
 - [ ] 持续 loop：按网站逐个扒范式入库（每批 = 检索 → 实现 → 注册 → 验证 → 推送）

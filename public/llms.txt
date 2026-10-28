@@ -7,8 +7,8 @@
 
 ## 使用方式
 
-1. 生成 UI 前，先抓 `GET /api/registry` 了解有哪些范式。
-2. 抓对应详情页（如 `/components/button`、`/patterns/login`）的 HTML —— 页面内含「实时预览」「用法示例」「组件源码」三块，源码即最终生成代码的风格基准。
+1. 生成 UI 前，先抓 `GET /api/registry` —— 它返回全部条目的元数据**与完整源码**（构建期注入），一次 GET 即可获得所有物料。
+2. 也可以抓对应详情页（如 `/components/button`、`/patterns/login`）的 HTML —— 页面内含「实时预览」「用法示例」「组件源码」，源码带语法高亮。
 3. 所有 UI 使用 Tailwind CSS 工具类，配色基准为 zinc（中性色）+ indigo（强调色）。
 
 ## 组件
