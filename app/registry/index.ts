@@ -2,7 +2,7 @@
  * app 端注册表：把 shared 元数据与真实源码（?raw 导入，保证与组件文件永远同步）合并。
  * 页面从这里取条目渲染详情页，不要直接 import 单个组件。
  */
-import { categories, components, patterns } from '#shared/registry-meta'
+import { categories, components, patterns, toPascal } from '#shared/registry-meta'
 import type { CategoryMeta, MetaEntry } from '#shared/registry-meta'
 
 import buttonSource from '~/components/ui/UButton.vue?raw'
@@ -23,6 +23,26 @@ import tableSource from '~/components/ui/UTable.vue?raw'
 import tableUsage from '~/components/demo/DemoTable.vue?raw'
 import senderSource from '~/components/ui/USender.vue?raw'
 import senderUsage from '~/components/demo/DemoSender.vue?raw'
+import agentMessageSource from '~/components/ui/UAgentMessage.vue?raw'
+import agentMessageUsage from '~/components/demo/DemoAgentMessage.vue?raw'
+import thinkingSource from '~/components/ui/UThinking.vue?raw'
+import thinkingUsage from '~/components/demo/DemoThinking.vue?raw'
+import streamTextSource from '~/components/ui/UStreamText.vue?raw'
+import streamTextUsage from '~/components/demo/DemoStreamText.vue?raw'
+import toolCallSource from '~/components/ui/UToolCall.vue?raw'
+import toolCallUsage from '~/components/demo/DemoToolCall.vue?raw'
+import quickRepliesSource from '~/components/ui/UQuickReplies.vue?raw'
+import quickRepliesUsage from '~/components/demo/DemoQuickReplies.vue?raw'
+import permissionSource from '~/components/ui/UPermission.vue?raw'
+import permissionUsage from '~/components/demo/DemoPermission.vue?raw'
+import taskListSource from '~/components/ui/UTaskList.vue?raw'
+import taskListUsage from '~/components/demo/DemoTaskList.vue?raw'
+import codeDiffSource from '~/components/ui/UCodeDiff.vue?raw'
+import codeDiffUsage from '~/components/demo/DemoCodeDiff.vue?raw'
+import terminalBlockSource from '~/components/ui/UTerminalBlock.vue?raw'
+import terminalBlockUsage from '~/components/demo/DemoTerminalBlock.vue?raw'
+import browserStepSource from '~/components/ui/UBrowserStep.vue?raw'
+import browserStepUsage from '~/components/demo/DemoBrowserStep.vue?raw'
 import loginSource from '~/components/patterns/PatternLogin.vue?raw'
 import dashboardSource from '~/components/patterns/PatternDashboard.vue?raw'
 
@@ -51,6 +71,16 @@ const sourceMap: Record<string, { source: string; usage: string }> = {
   modal: { source: modalSource, usage: modalUsage },
   table: { source: tableSource, usage: tableUsage },
   sender: { source: senderSource, usage: senderUsage },
+  'agent-message': { source: agentMessageSource, usage: agentMessageUsage },
+  thinking: { source: thinkingSource, usage: thinkingUsage },
+  'stream-text': { source: streamTextSource, usage: streamTextUsage },
+  'tool-call': { source: toolCallSource, usage: toolCallUsage },
+  'quick-replies': { source: quickRepliesSource, usage: quickRepliesUsage },
+  permission: { source: permissionSource, usage: permissionUsage },
+  'task-list': { source: taskListSource, usage: taskListUsage },
+  'code-diff': { source: codeDiffSource, usage: codeDiffUsage },
+  'terminal-block': { source: terminalBlockSource, usage: terminalBlockUsage },
+  'browser-step': { source: browserStepSource, usage: browserStepUsage },
 }
 
 const patternSourceMap: Record<string, string> = {
@@ -84,19 +114,15 @@ export function groupByCategory(): Array<CategoryMeta & { items: RegistryEntry[]
   }))
 }
 
-/** 路由名 → 源码文件名约定：button → UButton.vue / DemoButton.vue */
-function pascal(name: string): string {
-  return name.charAt(0).toUpperCase() + name.slice(1)
-}
-
+/** 路由名 → 源码文件名约定：button → UButton.vue，agent-message → UAgentMessage.vue */
 export function uiFile(name: string): string {
-  return `app/components/ui/U${pascal(name)}.vue`
+  return `app/components/ui/U${toPascal(name)}.vue`
 }
 
 export function demoFile(name: string): string {
-  return `app/components/demo/Demo${pascal(name)}.vue`
+  return `app/components/demo/Demo${toPascal(name)}.vue`
 }
 
 export function patternFile(name: string): string {
-  return `app/components/patterns/Pattern${pascal(name)}.vue`
+  return `app/components/patterns/Pattern${toPascal(name)}.vue`
 }

@@ -28,9 +28,18 @@ export const siteMeta = {
   repository: 'https://github.com/CarlOpenLab/uiref',
 }
 
+/** 路由名 → PascalCase 文件名：agent-message → AgentMessage */
+export function toPascal(name: string): string {
+  return name
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+}
+
 export const categories: CategoryMeta[] = [
   { id: 'basic', title: '基础', description: '按钮、徽标等最小交互单元' },
-  { id: 'agent', title: 'Agent 对话', description: '与 AI Agent 协作时的输入与交互控件' },
+  { id: 'agent', title: 'Agent 对话', description: '与 AI Agent 对话时的输入与交互控件' },
+  { id: 'agent-exec', title: 'Agent 执行', description: 'Agent 执行过程的展示与控制：任务、代码、终端、浏览器' },
   { id: 'form', title: '表单', description: '输入与选择类控件' },
   { id: 'layout', title: '布局', description: '内容分区与容器' },
   { id: 'navigation', title: '导航', description: '内容与页面的切换' },
@@ -93,6 +102,75 @@ export const components: MetaEntry[] = [
     category: 'agent',
     description:
       'Agent 对话输入器。自适应高度文本域，Enter 发送 / Shift+Enter 换行（兼容输入法组词），生成中一键变停止按钮，工具栏与提示支持插槽自定义。',
+  },
+  {
+    name: 'agent-message',
+    title: '消息气泡',
+    category: 'agent',
+    description:
+      '对话消息容器。用户右侧气泡、Agent 左侧带头像与操作行（复制 / 重新生成），是对话流的基础原语。',
+  },
+  {
+    name: 'thinking',
+    title: '思考过程',
+    category: 'agent',
+    description:
+      '推理过程折叠面板。思考中带脉冲动画，完成后收起为「已完成思考 · 用时」，可展开查看推理内容。',
+  },
+  {
+    name: 'stream-text',
+    title: '流式文本',
+    category: 'agent',
+    description:
+      '逐字打字机流式输出 + 呼吸光标，streaming 置 false 立即显示全文，适合对接 SSE / 流式接口。',
+  },
+  {
+    name: 'tool-call',
+    title: '工具调用',
+    category: 'agent',
+    description:
+      '工具调用卡片。展示工具名与运行 / 成功 / 失败状态，可展开查看调用参数与返回结果，Function Calling / MCP 场景必备。',
+  },
+  {
+    name: 'quick-replies',
+    title: '建议追问',
+    category: 'agent',
+    description: '对话末尾的可点击快捷指令 chips，点击 emit select，用于引导下一步对话。',
+  },
+  {
+    name: 'permission',
+    title: '权限审批',
+    category: 'agent',
+    description:
+      'Agent 请求执行敏感操作时的审批卡。展示工具与命令、风险等级，支持允许一次 / 总是允许 / 拒绝。',
+  },
+  {
+    name: 'task-list',
+    title: '任务计划',
+    category: 'agent-exec',
+    description:
+      'Agent 执行计划清单。pending / in_progress / completed 三态，头部自动汇总进度，长任务透明化的标配。',
+  },
+  {
+    name: 'code-diff',
+    title: '文件改动',
+    category: 'agent-exec',
+    description:
+      '代码改动卡片。文件路径 + 增删行数统计 + 逐行着色 diff，带审核状态与接受 / 拒绝操作区。',
+  },
+  {
+    name: 'terminal-block',
+    title: '终端执行',
+    category: 'agent-exec',
+    description:
+      '命令执行块。命令 + 输出流 + 完成 / 失败状态，运行中可一键停止，编码类 Agent 的标配。',
+  },
+  {
+    name: 'browser-step',
+    title: '浏览器操作',
+    category: 'agent-exec',
+    description:
+      'computer-use 步骤卡。步骤序号 + 动作描述 + 目标网址 + 截图区域，展示 Agent 操控浏览器的过程。',
   },
 ]
 

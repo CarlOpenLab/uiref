@@ -25,6 +25,19 @@
 ## Agent 对话
 
 - /components/sender — 发送器：Agent 对话输入器（自适应高度、Enter 发送、生成中变停止按钮、工具栏插槽自定义）
+- /components/agent-message — 消息气泡：用户/Agent 双侧布局、头像、操作行（复制/重新生成）
+- /components/thinking — 思考过程：推理折叠面板，思考中脉冲动画，完成后收起为用时摘要
+- /components/stream-text — 流式文本：逐字打字机 + 呼吸光标，streaming=false 显示全文
+- /components/tool-call — 工具调用：工具名 + 运行/成功/失败状态，可展开参数与结果（Function Calling / MCP）
+- /components/quick-replies — 建议追问：对话末尾快捷指令 chips
+- /components/permission — 权限审批：敏感操作确认卡，允许一次 / 总是允许 / 拒绝
+
+## Agent 执行
+
+- /components/task-list — 任务计划：pending/in_progress/completed 三态清单 + 进度汇总
+- /components/code-diff — 文件改动：路径 + 增删统计 + 逐行着色 diff + 接受/拒绝
+- /components/terminal-block — 终端执行：命令 + 输出流 + 状态，运行中可停止
+- /components/browser-step — 浏览器操作：computer-use 步骤卡，动作 + 网址 + 截图高亮区域
 
 ## 页面模板
 

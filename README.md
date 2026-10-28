@@ -61,8 +61,9 @@ npm run generate   # 纯静态生成（SSG）
 
 ## Roadmap
 
+- [x] Agent 组件系列（对话：sender / message / thinking / stream / tool-call / quick-replies / permission；执行：task-list / code-diff / terminal / browser-step）
 - [ ] 暗色模式
 - [ ] 构建期把源码注入 `/api/registry`（一次 GET 拿全部代码）
 - [ ] 代码块语法高亮（shiki）
-- [ ] 更多组件：select / checkbox / radio / dropdown / toast / pagination / skeleton
-- [ ] 更多模板：设置页、列表页、文章页、落地页
+- [ ] 更多组件：select / checkbox / radio / dropdown / toast / pagination / skeleton / attachments / sources
+- [ ] 更多模板：Agent 工作台、设置页、列表页、文章页、落地页
