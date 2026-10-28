@@ -21,6 +21,8 @@ import modalSource from '~/components/ui/UModal.vue?raw'
 import modalUsage from '~/components/demo/DemoModal.vue?raw'
 import tableSource from '~/components/ui/UTable.vue?raw'
 import tableUsage from '~/components/demo/DemoTable.vue?raw'
+import senderSource from '~/components/ui/USender.vue?raw'
+import senderUsage from '~/components/demo/DemoSender.vue?raw'
 import loginSource from '~/components/patterns/PatternLogin.vue?raw'
 import dashboardSource from '~/components/patterns/PatternDashboard.vue?raw'
 
@@ -48,6 +50,7 @@ const sourceMap: Record<string, { source: string; usage: string }> = {
   alert: { source: alertSource, usage: alertUsage },
   modal: { source: modalSource, usage: modalUsage },
   table: { source: tableSource, usage: tableUsage },
+  sender: { source: senderSource, usage: senderUsage },
 }
 
 const patternSourceMap: Record<string, string> = {

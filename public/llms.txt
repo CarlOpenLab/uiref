@@ -22,6 +22,10 @@
 - /components/modal — 模态框：遮罩关闭、底部操作区、确认框用法
 - /components/table — 表格：列配置、单元格插槽（#cell-<key>）、空状态
 
+## Agent 对话
+
+- /components/sender — 发送器：Agent 对话输入器（自适应高度、Enter 发送、生成中变停止按钮、工具栏插槽自定义）
+
 ## 页面模板
 
 - /patterns/login — 居中卡片式登录页：表单 + 第三方登录 + 辅助链接

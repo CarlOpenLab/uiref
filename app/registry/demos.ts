@@ -12,6 +12,7 @@ import DemoTabs from '~/components/demo/DemoTabs.vue'
 import DemoAlert from '~/components/demo/DemoAlert.vue'
 import DemoModal from '~/components/demo/DemoModal.vue'
 import DemoTable from '~/components/demo/DemoTable.vue'
+import DemoSender from '~/components/demo/DemoSender.vue'
 import PatternLogin from '~/components/patterns/PatternLogin.vue'
 import PatternDashboard from '~/components/patterns/PatternDashboard.vue'
 
@@ -24,6 +25,7 @@ export const demoMap: Record<string, Component> = {
   alert: DemoAlert,
   modal: DemoModal,
   table: DemoTable,
+  sender: DemoSender,
 }
 
 export const patternDemoMap: Record<string, Component> = {

@@ -30,6 +30,7 @@ export const siteMeta = {
 
 export const categories: CategoryMeta[] = [
   { id: 'basic', title: '基础', description: '按钮、徽标等最小交互单元' },
+  { id: 'agent', title: 'Agent 对话', description: '与 AI Agent 协作时的输入与交互控件' },
   { id: 'form', title: '表单', description: '输入与选择类控件' },
   { id: 'layout', title: '布局', description: '内容分区与容器' },
   { id: 'navigation', title: '导航', description: '内容与页面的切换' },
@@ -85,6 +86,13 @@ export const components: MetaEntry[] = [
     title: '表格',
     category: 'data',
     description: '数据表格。列配置驱动，支持单元格插槽自定义与空状态。',
+  },
+  {
+    name: 'sender',
+    title: '发送器',
+    category: 'agent',
+    description:
+      'Agent 对话输入器。自适应高度文本域，Enter 发送 / Shift+Enter 换行（兼容输入法组词），生成中一键变停止按钮，工具栏与提示支持插槽自定义。',
   },
 ]
 
