@@ -8,11 +8,11 @@
 
 | 路由 | 说明 |
 | --- | --- |
-| `/` | 总目录：分类 → 组件卡片 → 页面模板 |
-| `/components` | 全部组件列表 |
-| `/components/:name` | 组件详情：实时预览 + 用法示例源码 + 组件源码 |
-| `/patterns` | 页面模板列表 |
-| `/patterns/:name` | 整页模板：固定视口预览 + 完整源码 |
+| `/` | 首页：Hero（由库内 Agent 组件拼装的演示窗）→ 分类目录 → 页面模板 → Agent 接入说明 |
+| `/components` | 全部组件：按分类分组，缩略图即真实组件渲染 |
+| `/components/:name` | 组件详情：实时预览 + 用法示例 / 组件源码（tab 切换，SSR 同时输出两份源码）+ Agent 提示词 |
+| `/patterns` | 页面模板：浏览器外框整页缩略图 |
+| `/patterns/:name` | 整页模板：固定视口预览 + 完整源码 + Agent 提示词 |
 | `/api/registry` | 机器可读元数据 JSON（分类、条目、源码文件路径） |
 | `/llms.txt` | Agent 友好的站点说明 |
 
@@ -27,7 +27,11 @@ app/components/patterns/PatternLogin.vue ← 整页模板
 app/registry/index.ts                ← 合并元数据 + ?raw 源码（自动同步，永不失真）
 app/registry/demos.ts                ← 路由名 → 渲染组件的映射
 server/api/registry.get.ts           ← /api/registry
+app/components/site/                 ← 站点外壳（导航、文档侧边栏、预览画布、代码块），不属于组件库物料
+app/layouts/docs.vue                 ← /components 与 /patterns 的文档布局（侧边栏 + 移动端目录抽屉）
 ```
+
+缩略图（组件 / 模板卡片）只在客户端挂载，目录页的 SSR HTML 保持纯文字，Agent 抓取不受 demo 文本干扰。
 
 命名规则：路由名 `button` ↔ 组件 `UButton.vue` ↔ 示例 `DemoButton.vue` ↔ 模板 `PatternLogin.vue`。
 

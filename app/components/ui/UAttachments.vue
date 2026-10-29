@@ -9,7 +9,7 @@ interface AttachFile {
   type?: 'image' | 'pdf' | 'code' | 'file'
 }
 
-defineProps<{
+const props = defineProps<{
   files: AttachFile[]
 }>()
 

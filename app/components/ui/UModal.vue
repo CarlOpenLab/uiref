@@ -3,7 +3,7 @@ interface Props {
   title?: string
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const open = defineModel<boolean>({ default: false })
 </script>

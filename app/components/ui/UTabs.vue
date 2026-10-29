@@ -8,7 +8,7 @@ interface Props {
   tabs: TabItem[]
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 /** 当前激活的 tab id，v-model 双向绑定 */
 const active = defineModel<string>({ required: true })

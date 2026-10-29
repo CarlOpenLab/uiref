@@ -4,7 +4,7 @@ interface Props {
   disabled?: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emit = defineEmits<{ select: [item: string] }>()
 </script>

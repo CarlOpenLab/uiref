@@ -4,7 +4,7 @@ interface Props {
   disabled?: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const model = defineModel<boolean>({ default: false })
 </script>

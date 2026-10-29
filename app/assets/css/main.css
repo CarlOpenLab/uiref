@@ -5,10 +5,80 @@
     "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Consolas,
     "Liberation Mono", Menlo, monospace;
+
+  /* 吸顶顶栏高度：h-header / top-header，锚点偏移也以它为基准 */
+  --spacing-header: 3.5rem;
+
+  --animate-fade-in: fade-in 0.3s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@layer base {
+  /* 锚点跳转（原生 # 链接与路由 hash 滚动）统一避开吸顶栏；docs 布局会加大 --anchor-offset */
+  :root {
+    --anchor-offset: var(--spacing-header);
+  }
+  [id] {
+    scroll-margin-top: var(--anchor-offset);
+  }
+}
+
+/* 全站内容容器：顶栏、页脚、文档布局与首页各区块同宽对齐 */
+@utility page-container {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+/* 预览画布：细点阵底纹，提示「这是可交互画布」 */
+@utility bg-dots {
+  background-image: radial-gradient(circle, rgb(24 24 27 / 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Hero 背景网格线 */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(24 24 27 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(24 24 27 / 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* 细滚动条：侧边栏、代码块等内部滚动区，浅色 / 深色底上都不突兀 */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(161 161 170 / 0.45) transparent;
+}
+
+/* 缩略图冻结动画：目录页几十张静态缩略图不必各跑各的呼吸 / 打字动画，进详情页才播放 */
+@utility freeze-animations {
+  & *,
+  & *::before,
+  & *::after {
+    animation-play-state: paused !important;
+  }
+}
+
+/* CodeBlock：shiki 输出的每个 .line 前加行号 */
+.code-lines code {
+  counter-reset: line;
+}
+.code-lines .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.75rem;
+  margin-right: 1.25rem;
+  text-align: right;
+  color: rgb(113 113 122 / 0.6);
+  user-select: none;
 }
 
 /* UModal / UToast 进出场 */
@@ -29,4 +99,33 @@ html {
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
+}
+
+/* 移动端目录抽屉：遮罩淡入 + 面板滑入 */
+.drawer-enter-active,
+.drawer-leave-active,
+.drawer-enter-active .drawer-panel,
+.drawer-leave-active .drawer-panel {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.drawer-enter-from,
+.drawer-leave-to {
+  opacity: 0;
+}
+.drawer-enter-from .drawer-panel,
+.drawer-leave-to .drawer-panel {
+  transform: translateX(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

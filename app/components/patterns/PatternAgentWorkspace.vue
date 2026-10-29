@@ -12,7 +12,9 @@ const sessions = [
   { title: '文档站迁移', time: '昨天', active: false },
 ]
 
-const tasks = [
+type TaskStatus = 'pending' | 'in_progress' | 'completed'
+
+const tasks: Array<{ id: string; text: string; status: TaskStatus }> = [
   { id: '1', text: '梳理现有落地页结构', status: 'completed' },
   { id: '2', text: '应用深色主题 tokens', status: 'completed' },
   { id: '3', text: '生成价格表组件', status: 'in_progress' },

@@ -7,6 +7,8 @@ export interface CategoryMeta {
   id: string
   title: string
   description: string
+  /** 所属大类：agent = Agent 专属组件，general = 通用组件（首页目录据此分两层） */
+  tier: 'agent' | 'general'
 }
 
 export interface MetaEntry {
@@ -37,14 +39,14 @@ export function toPascal(name: string): string {
 }
 
 export const categories: CategoryMeta[] = [
-  { id: 'basic', title: '基础', description: '按钮、徽标等最小交互单元' },
-  { id: 'agent', title: 'Agent 对话', description: '与 AI Agent 对话时的输入与交互控件' },
-  { id: 'agent-exec', title: 'Agent 执行', description: 'Agent 执行过程的展示与控制：任务、代码、终端、浏览器' },
-  { id: 'form', title: '表单', description: '输入与选择类控件' },
-  { id: 'layout', title: '布局', description: '内容分区与容器' },
-  { id: 'navigation', title: '导航', description: '内容与页面的切换' },
-  { id: 'feedback', title: '反馈', description: '状态告知与轻交互' },
-  { id: 'data', title: '数据展示', description: '结构化数据的呈现' },
+  { id: 'basic', title: '基础', description: '按钮、徽标等最小交互单元', tier: 'general' },
+  { id: 'agent', title: 'Agent 对话', description: '与 AI Agent 对话时的输入与交互控件', tier: 'agent' },
+  { id: 'agent-exec', title: 'Agent 执行', description: 'Agent 执行过程的展示与控制：任务、代码、终端、浏览器', tier: 'agent' },
+  { id: 'form', title: '表单', description: '输入与选择类控件', tier: 'general' },
+  { id: 'layout', title: '布局', description: '内容分区与容器', tier: 'general' },
+  { id: 'navigation', title: '导航', description: '内容与页面的切换', tier: 'general' },
+  { id: 'feedback', title: '反馈', description: '状态告知与轻交互', tier: 'general' },
+  { id: 'data', title: '数据展示', description: '结构化数据的呈现', tier: 'general' },
 ]
 
 export const components: MetaEntry[] = [
@@ -256,3 +258,96 @@ export const patterns: MetaEntry[] = [
     description: 'SaaS 营销落地页：导航 + Hero + 客户 Logo + 特性卡片 + CTA 区 + 页脚。',
   },
 ]
+
+/* ---------- 只依赖元数据的辅助函数：目录页、侧边栏等不需要源码的地方从这里取，避免拉入 ?raw 源码包 ---------- */
+
+/**
+ * @description 判断条目是否为页面模板（模板的 category 固定为 'pattern'）
+ * @param {MetaEntry} entry - 注册表条目
+ * @returns {boolean} 页面模板返回 true，组件返回 false
+ */
+export function isPattern(entry: MetaEntry): boolean {
+  return entry.category === 'pattern'
+}
+
+/**
+ * @description 条目详情页路由：组件走 /components/<name>，模板走 /patterns/<name>
+ * @param {MetaEntry} entry - 注册表条目
+ * @returns {string} 详情页路径
+ */
+export function entryPath(entry: MetaEntry): string {
+  return `${isPattern(entry) ? '/patterns' : '/components'}/${entry.name}`
+}
+
+/**
+ * @description 路由名 → 组件名约定：button → UButton，agent-message → UAgentMessage
+ * @param {string} name - 组件路由名
+ * @returns {string} 组件名
+ */
+export function uiComponentName(name: string): string {
+  return `U${toPascal(name)}`
+}
+
+/**
+ * @description 组件源码文件路径：button → app/components/ui/UButton.vue
+ * @param {string} name - 组件路由名
+ * @returns {string} 相对仓库根目录的文件路径
+ */
+export function uiFile(name: string): string {
+  return `app/components/ui/${uiComponentName(name)}.vue`
+}
+
+/**
+ * @description 用法示例文件路径：button → app/components/demo/DemoButton.vue
+ * @param {string} name - 组件路由名
+ * @returns {string} 相对仓库根目录的文件路径
+ */
+export function demoFile(name: string): string {
+  return `app/components/demo/Demo${toPascal(name)}.vue`
+}
+
+/**
+ * @description 页面模板文件路径：login → app/components/patterns/PatternLogin.vue
+ * @param {string} name - 模板路由名
+ * @returns {string} 相对仓库根目录的文件路径
+ */
+export function patternFile(name: string): string {
+  return `app/components/patterns/Pattern${toPascal(name)}.vue`
+}
+
+/**
+ * @description 按分类分组组件，只保留有组件的分类，供首页目录、组件总览与侧边栏渲染
+ * @returns {Array<CategoryMeta & { items: MetaEntry[] }>} 分类及其下的组件
+ */
+export function groupByCategory(): Array<CategoryMeta & { items: MetaEntry[] }> {
+  return categories
+    .map((category) => ({ ...category, items: components.filter((c) => c.category === category.id) }))
+    .filter((group) => group.items.length > 0)
+}
+
+const STYLE_BASELINE = '样式基准：Tailwind CSS，中性色 zinc，强调色 indigo，圆角 rounded-lg / rounded-xl'
+
+/**
+ * @description 组件详情页「给 Agent 的使用提示」：源码路径 + 预览地址 + 样式基准，可直接复制给任何编码 Agent
+ * @param {MetaEntry} entry - 组件条目
+ * @returns {string} 多行提示词文本
+ */
+export function componentPrompt(entry: MetaEntry): string {
+  return `请按照 UIRef 组件库的「${entry.title} (${entry.name})」范式来实现界面：
+- 组件源码：${uiFile(entry.name)}
+- 用法示例：${demoFile(entry.name)}
+- 在线预览：${entryPath(entry)}（源码也可从 /api/registry 获取）
+- ${STYLE_BASELINE}`
+}
+
+/**
+ * @description 页面模板详情页「给 Agent 的使用提示」：模板源码路径 + 预览地址 + 样式基准
+ * @param {MetaEntry} entry - 页面模板条目
+ * @returns {string} 多行提示词文本
+ */
+export function patternPrompt(entry: MetaEntry): string {
+  return `请按照 UIRef 页面模板的「${entry.title} (${entry.name})」范式实现整页：
+- 模板源码：${patternFile(entry.name)}
+- 在线预览：${entryPath(entry)}（源码也可从 /api/registry 获取）
+- ${STYLE_BASELINE}`
+}

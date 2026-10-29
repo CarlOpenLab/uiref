@@ -1,74 +1,54 @@
 /**
- * 路由名 → 实际渲染的 Demo 组件。
+ * 路由名 → 实际渲染的 Demo 组件（异步加载：每个页面只下载自己渲染的 demo，SSR 照常直出）。
  * 新增条目时在 registry/index.ts 加元数据，在这里加一行映射。
  */
+import { defineAsyncComponent } from 'vue'
 import type { Component } from 'vue'
-
-import DemoButton from '~/components/demo/DemoButton.vue'
-import DemoBadge from '~/components/demo/DemoBadge.vue'
-import DemoInput from '~/components/demo/DemoInput.vue'
-import DemoCard from '~/components/demo/DemoCard.vue'
-import DemoTabs from '~/components/demo/DemoTabs.vue'
-import DemoAlert from '~/components/demo/DemoAlert.vue'
-import DemoModal from '~/components/demo/DemoModal.vue'
-import DemoTable from '~/components/demo/DemoTable.vue'
-import DemoSender from '~/components/demo/DemoSender.vue'
-import DemoAgentMessage from '~/components/demo/DemoAgentMessage.vue'
-import DemoThinking from '~/components/demo/DemoThinking.vue'
-import DemoStreamText from '~/components/demo/DemoStreamText.vue'
-import DemoToolCall from '~/components/demo/DemoToolCall.vue'
-import DemoQuickReplies from '~/components/demo/DemoQuickReplies.vue'
-import DemoPermission from '~/components/demo/DemoPermission.vue'
-import DemoTaskList from '~/components/demo/DemoTaskList.vue'
-import DemoCodeDiff from '~/components/demo/DemoCodeDiff.vue'
-import DemoTerminalBlock from '~/components/demo/DemoTerminalBlock.vue'
-import DemoBrowserStep from '~/components/demo/DemoBrowserStep.vue'
-import DemoAttachments from '~/components/demo/DemoAttachments.vue'
-import DemoModelPicker from '~/components/demo/DemoModelPicker.vue'
-import DemoSources from '~/components/demo/DemoSources.vue'
-import DemoToast from '~/components/demo/DemoToast.vue'
-import DemoSkeleton from '~/components/demo/DemoSkeleton.vue'
-import DemoSelect from '~/components/demo/DemoSelect.vue'
-import DemoCheckbox from '~/components/demo/DemoCheckbox.vue'
-import DemoPagination from '~/components/demo/DemoPagination.vue'
-import PatternAgentWorkspace from '~/components/patterns/PatternAgentWorkspace.vue'
-import PatternLanding from '~/components/patterns/PatternLanding.vue'
-import PatternLogin from '~/components/patterns/PatternLogin.vue'
-import PatternDashboard from '~/components/patterns/PatternDashboard.vue'
+import { isPattern } from '#shared/registry-meta'
+import type { MetaEntry } from '#shared/registry-meta'
 
 export const demoMap: Record<string, Component> = {
-  button: DemoButton,
-  badge: DemoBadge,
-  input: DemoInput,
-  card: DemoCard,
-  tabs: DemoTabs,
-  alert: DemoAlert,
-  modal: DemoModal,
-  table: DemoTable,
-  sender: DemoSender,
-  'agent-message': DemoAgentMessage,
-  thinking: DemoThinking,
-  'stream-text': DemoStreamText,
-  'tool-call': DemoToolCall,
-  'quick-replies': DemoQuickReplies,
-  permission: DemoPermission,
-  'task-list': DemoTaskList,
-  'code-diff': DemoCodeDiff,
-  'terminal-block': DemoTerminalBlock,
-  'browser-step': DemoBrowserStep,
-  attachments: DemoAttachments,
-  'model-picker': DemoModelPicker,
-  sources: DemoSources,
-  toast: DemoToast,
-  skeleton: DemoSkeleton,
-  select: DemoSelect,
-  checkbox: DemoCheckbox,
-  pagination: DemoPagination,
+  button: defineAsyncComponent(() => import('~/components/demo/DemoButton.vue')),
+  badge: defineAsyncComponent(() => import('~/components/demo/DemoBadge.vue')),
+  input: defineAsyncComponent(() => import('~/components/demo/DemoInput.vue')),
+  card: defineAsyncComponent(() => import('~/components/demo/DemoCard.vue')),
+  tabs: defineAsyncComponent(() => import('~/components/demo/DemoTabs.vue')),
+  alert: defineAsyncComponent(() => import('~/components/demo/DemoAlert.vue')),
+  modal: defineAsyncComponent(() => import('~/components/demo/DemoModal.vue')),
+  table: defineAsyncComponent(() => import('~/components/demo/DemoTable.vue')),
+  sender: defineAsyncComponent(() => import('~/components/demo/DemoSender.vue')),
+  'agent-message': defineAsyncComponent(() => import('~/components/demo/DemoAgentMessage.vue')),
+  thinking: defineAsyncComponent(() => import('~/components/demo/DemoThinking.vue')),
+  'stream-text': defineAsyncComponent(() => import('~/components/demo/DemoStreamText.vue')),
+  'tool-call': defineAsyncComponent(() => import('~/components/demo/DemoToolCall.vue')),
+  'quick-replies': defineAsyncComponent(() => import('~/components/demo/DemoQuickReplies.vue')),
+  permission: defineAsyncComponent(() => import('~/components/demo/DemoPermission.vue')),
+  'task-list': defineAsyncComponent(() => import('~/components/demo/DemoTaskList.vue')),
+  'code-diff': defineAsyncComponent(() => import('~/components/demo/DemoCodeDiff.vue')),
+  'terminal-block': defineAsyncComponent(() => import('~/components/demo/DemoTerminalBlock.vue')),
+  'browser-step': defineAsyncComponent(() => import('~/components/demo/DemoBrowserStep.vue')),
+  attachments: defineAsyncComponent(() => import('~/components/demo/DemoAttachments.vue')),
+  'model-picker': defineAsyncComponent(() => import('~/components/demo/DemoModelPicker.vue')),
+  sources: defineAsyncComponent(() => import('~/components/demo/DemoSources.vue')),
+  toast: defineAsyncComponent(() => import('~/components/demo/DemoToast.vue')),
+  skeleton: defineAsyncComponent(() => import('~/components/demo/DemoSkeleton.vue')),
+  select: defineAsyncComponent(() => import('~/components/demo/DemoSelect.vue')),
+  checkbox: defineAsyncComponent(() => import('~/components/demo/DemoCheckbox.vue')),
+  pagination: defineAsyncComponent(() => import('~/components/demo/DemoPagination.vue')),
 }
 
 export const patternDemoMap: Record<string, Component> = {
-  login: PatternLogin,
-  dashboard: PatternDashboard,
-  'agent-workspace': PatternAgentWorkspace,
-  landing: PatternLanding,
+  login: defineAsyncComponent(() => import('~/components/patterns/PatternLogin.vue')),
+  dashboard: defineAsyncComponent(() => import('~/components/patterns/PatternDashboard.vue')),
+  'agent-workspace': defineAsyncComponent(() => import('~/components/patterns/PatternAgentWorkspace.vue')),
+  landing: defineAsyncComponent(() => import('~/components/patterns/PatternLanding.vue')),
+}
+
+/**
+ * @description 取条目对应的渲染组件：页面模板查 patternDemoMap，组件查 demoMap
+ * @param {MetaEntry} entry - 注册表条目
+ * @returns {Component | undefined} 渲染组件；映射里没登记时为 undefined
+ */
+export function demoFor(entry: MetaEntry): Component | undefined {
+  return (isPattern(entry) ? patternDemoMap : demoMap)[entry.name]
 }

@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { patternEntries } from '~/registry'
+import { patterns } from '#shared/registry-meta'
+
+definePageMeta({ layout: 'docs' })
 
 useHead({ title: '页面模板 · UIRef' })
 </script>
 
 <template>
-  <div class="py-10">
-    <h1 class="text-3xl font-bold tracking-tight">页面模板</h1>
-    <p class="mt-2 text-zinc-600">
-      组件组合成整页的完整范式。点击进入可在固定视口里预览整页效果，并拿到完整源码。
-    </p>
+  <div>
+    <header class="border-b border-zinc-200 pb-8">
+      <SectionHeading
+        heading="h1"
+        kicker="整页范式"
+        title="页面模板"
+        :description="`${patterns.length} 个由组件组合而成的整页模板。缩略图即真实渲染，进入详情页可在固定视口里交互预览，并拿到单文件完整源码。`"
+      />
+    </header>
 
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <EntryCard v-for="item in patternEntries" :key="item.name" :entry="item" base="/patterns" />
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <EntryCard v-for="item in patterns" :key="item.name" :entry="item" kind="pattern" />
     </div>
   </div>
 </template>

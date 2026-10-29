@@ -93,8 +93,8 @@ const statusLabel: Record<string, { label: string; tone: 'green' | 'amber' | 're
           </div>
           <UTable class="mt-3" :columns="columns" :rows="rows">
             <template #cell-status="{ value }">
-              <UBadge :tone="statusLabel[value as string].tone" dot size="sm">
-                {{ statusLabel[value as string].label }}
+              <UBadge :tone="statusLabel[value as string]!.tone" dot size="sm">
+                {{ statusLabel[value as string]!.label }}
               </UBadge>
             </template>
           </UTable>

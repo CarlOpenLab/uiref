@@ -26,8 +26,8 @@ const statusLabel: Record<string, { label: string; tone: 'green' | 'amber' | 're
       <h3 class="text-sm font-medium text-zinc-900">基础表格 + 自定义单元格</h3>
       <UTable class="mt-3" :columns="columns" :rows="rows">
         <template #cell-status="{ value }">
-          <UBadge :tone="statusLabel[value as string].tone" dot size="sm">
-            {{ statusLabel[value as string].label }}
+          <UBadge :tone="statusLabel[value as string]!.tone" dot size="sm">
+            {{ statusLabel[value as string]!.label }}
           </UBadge>
         </template>
       </UTable>

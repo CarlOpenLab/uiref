@@ -1,8 +1,9 @@
 /**
  * app 端注册表：把 shared 元数据与真实源码（?raw 导入，保证与组件文件永远同步）合并。
  * 页面从这里取条目渲染详情页，不要直接 import 单个组件。
+ * 本模块会带上全部源码；只需元数据的地方（目录、侧边栏、路径与提示词）请直接用 #shared/registry-meta。
  */
-import { categories, components, patterns, toPascal } from '#shared/registry-meta'
+import { categories, components, patterns } from '#shared/registry-meta'
 import type { CategoryMeta, MetaEntry } from '#shared/registry-meta'
 
 import buttonSource from '~/components/ui/UButton.vue?raw'
@@ -116,15 +117,17 @@ const patternSourceMap: Record<string, string> = {
   landing: landingSource,
 }
 
-export const componentEntries: RegistryEntry[] = components.map((c) => ({
-  ...c,
-  ...sourceMap[c.name],
-}))
+export const componentEntries: RegistryEntry[] = components.map((c) => {
+  const code = sourceMap[c.name]
+  if (!code) throw new Error(`registry: 组件 ${c.name} 缺少源码映射（sourceMap）`)
+  return { ...c, ...code }
+})
 
-export const patternEntries: PatternEntry[] = patterns.map((p) => ({
-  ...p,
-  source: patternSourceMap[p.name],
-}))
+export const patternEntries: PatternEntry[] = patterns.map((p) => {
+  const source = patternSourceMap[p.name]
+  if (source === undefined) throw new Error(`registry: 模板 ${p.name} 缺少源码映射（patternSourceMap）`)
+  return { ...p, source }
+})
 
 export function getComponent(name: string): RegistryEntry | undefined {
   return componentEntries.find((c) => c.name === name)
@@ -142,25 +145,4 @@ export function neighbors<T extends { name: string }>(
   const index = list.findIndex((item) => item.name === name)
   if (index === -1) return {}
   return { prev: list[index - 1], next: list[index + 1] }
-}
-
-/** 按分类分组，供目录页渲染 */
-export function groupByCategory(): Array<CategoryMeta & { items: RegistryEntry[] }> {
-  return categories.map((cat) => ({
-    ...cat,
-    items: componentEntries.filter((c) => c.category === cat.id),
-  }))
-}
-
-/** 路由名 → 源码文件名约定：button → UButton.vue，agent-message → UAgentMessage.vue */
-export function uiFile(name: string): string {
-  return `app/components/ui/U${toPascal(name)}.vue`
-}
-
-export function demoFile(name: string): string {
-  return `app/components/demo/Demo${toPascal(name)}.vue`
-}
-
-export function patternFile(name: string): string {
-  return `app/components/patterns/Pattern${toPascal(name)}.vue`
 }
